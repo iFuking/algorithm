@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-	char ch = '7';
+	char ch = '8';
 	printf("%c\n", toupper(ch));
 	return 0;
 }

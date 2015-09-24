@@ -8,8 +8,8 @@ int N;
 
 bool is_prime(int n)
 {
-	if (n==2 || n==3) return true;
-	for (int i = 2; i <= sqrt(1.0*n); i += 2) {
+	if (n == 1) return false;
+	for (int i = 2; i*i <= n; ++i) {
 		if (n % i == 0) return false;
 	}
 	return true;
@@ -37,7 +37,6 @@ int rev_N(int n, int r)
 void solve()
 {
 	int D; cin >> D;
-	if (N == 1) { printf("No\n"); return; }
 	int rev = rev_N(N, D);
 	if (is_prime(N) && is_prime(rev)) { printf("Yes\n"); return; }
 	printf("No\n");

@@ -44,7 +44,7 @@ void solve()
 	sort(sols.begin(), sols.end(), cmp);
 	printf("%d = ", N);
 	for (int i = 0; i < sols[0].size()-1; ++i) printf("%d^%d + ", sols[0][i], P);
-	printf("%d^%d", sols[0][sols[0].size()-1], P);
+	printf("%d^%d\n", sols[0][sols[0].size()-1], P);
 	return;
 }
 

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "longest_common_subsequence", "longest_common_subsequence\longest_common_subsequence.vcxproj", "{0913D398-2B77-49FC-B763-5E5AA65C1388}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0913D398-2B77-49FC-B763-5E5AA65C1388}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0913D398-2B77-49FC-B763-5E5AA65C1388}.Debug|Win32.Build.0 = Debug|Win32
+		{0913D398-2B77-49FC-B763-5E5AA65C1388}.Release|Win32.ActiveCfg = Release|Win32
+		{0913D398-2B77-49FC-B763-5E5AA65C1388}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

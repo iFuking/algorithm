@@ -10,9 +10,6 @@ public:
     int minDistance(string word1, string word2) {
 		for (int j = 0; j <= word2.length(); ++j) dp[0][j] = j;
 		for (int i = 0; i <= word1.length(); ++i) dp[i][0] = i;
-		if (word1=="" && word2=="") return dp[0][0];
-		else if (word1 == "") return dp[0][word2.length()];
-		else if (word2 == "") return dp[word1.length()][0];
 
 		for (int i = 1; i <= word1.length(); ++i) {
 			for (int j = 1; j <= word2.length(); ++j) {

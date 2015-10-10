@@ -7,7 +7,8 @@ bool cmp(const char &ch1, const char &ch2) { return ch1 > ch2; }
 
 int main()
 {
-	string str = "681215";
-	sort(str.begin(), str.end(), cmp);
+	char ch = '+';
+	string s = "";
+	s += ch;
 	return 0;
 }

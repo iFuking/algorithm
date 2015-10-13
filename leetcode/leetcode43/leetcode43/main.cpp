@@ -3,7 +3,7 @@
 #include <cstring>
 using namespace std;
 
-const int maxn = 1e6 + 10;
+const int maxn = 1e3 + 10;
 int a[maxn], b[maxn], m[maxn];
 char m_str[maxn];
 

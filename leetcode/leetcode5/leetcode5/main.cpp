@@ -17,7 +17,7 @@ public:
 		int index = 0, pr = 0;
 		memset(p, 0, sizeof(p));
 		for (int i = 1; i < ret.length()-1; ++i) {
-			int i_mirror = 2*index-1;
+			int i_mirror = 2*index-i;
 			p[i] = pr>i ? min(p[i_mirror], pr-i) : 1;
 			while (ret[i-p[i]] == ret[i+p[i]]) ++p[i];
 			if (i+p[i] > pr) { pr = i+p[i]; index = i; }

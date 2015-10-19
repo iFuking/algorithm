@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "leetcode3~", "leetcode3~\leetcode3~.vcxproj", "{DB99C019-4BF5-41FD-AD03-397C019DDE43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB99C019-4BF5-41FD-AD03-397C019DDE43}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB99C019-4BF5-41FD-AD03-397C019DDE43}.Debug|Win32.Build.0 = Debug|Win32
+		{DB99C019-4BF5-41FD-AD03-397C019DDE43}.Release|Win32.ActiveCfg = Release|Win32
+		{DB99C019-4BF5-41FD-AD03-397C019DDE43}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

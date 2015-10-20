@@ -10,10 +10,10 @@ int n, m;
 multiset<int> near[maxn];
 
 int stamp;
-int size[maxn], father[maxn], son[maxn];
+int cluster[maxn], father[maxn], kid[maxn];
 int top[maxn], idx[maxn], pos[maxn];
-int whiteNum;
-bool isWhite[maxn];
+int festiveNum;
+bool isFestive[maxn];
 
 inline int getD(int u)
 {
@@ -56,7 +56,7 @@ int nodeNum, tree[maxn];
 
 void initNode(int x)
 {
-    if (isWhite[pos[node[x].l]]) node[x].minL = node[x].minR = 0;
+    if (isFestive[pos[node[x].l]]) node[x].minL = node[x].minR = 0;
     else node[x].minL = node[x].minR = getD(node[x].l);
 	return;
 }
@@ -118,16 +118,16 @@ int queryTreeR(int x, int l, int r)
 
 void initRelation(int u, int f = -1)
 {
-    size[u] = 1;
+    cluster[u] = 1;
     father[u] = f;
-    son[u] = 0;
+    kid[u] = 0;
     top[u] = u;
     for (int i = head[u]; ~i; i = edge[i].next) {
         int v = edge[i].v;
         if (v != f) {
             initRelation(v, u);
-            if (size[v] > size[son[u]]) son[u] = v;
-            size[u] += size[v];
+            if (cluster[v] > cluster[kid[u]]) kid[u] = v;
+            cluster[u] += cluster[v];
         }
     }
 	return;
@@ -137,13 +137,13 @@ void initIndex(int u, int f = -1)
 {
     idx[u] = ++stamp;
     pos[stamp] = u;
-    if (son[u]) {
-        top[son[u]] = top[u];
-        initIndex(son[u], u);
+    if (kid[u]) {
+        top[kid[u]] = top[u];
+        initIndex(kid[u], u);
     }
     for (int i = head[u]; ~i; i = edge[i].next) {
         int v = edge[i].v;
-        if (v!=f && v!=son[u]) initIndex(v, u);
+        if (v!=f && v!=kid[u]) initIndex(v, u);
     }
 	return;
 }
@@ -160,9 +160,9 @@ void buildTrees(int u, int f)
 {
     for (int i = head[u]; ~i; i = edge[i].next) {
         int v = edge[i].v;
-        if (v!=f && v!=son[u]) buildTrees(v, u);
+        if (v!=f && v!=kid[u]) buildTrees(v, u);
     }
-    if (son[u]) buildTrees(son[u], u);
+    if (kid[u]) buildTrees(kid[u], u);
     else tree[idx[top[u]]] = buildTree(idx[top[u]], idx[u]);
 	return;
 }
@@ -177,17 +177,17 @@ void init()
 {
     nodeNum = 0;
     clearEdge();
-    memset(isWhite, false, sizeof(isWhite));
-	whiteNum = 0; isWhite[1] = true;
+    memset(isFestive, false, sizeof(isFestive));
+	festiveNum = 1; isFestive[1] = true;
     for (int i = 1; i <= n; ++i) near[i].clear();
 	return;
 }
 
 void update(int u)
 {
-    if (!isWhite[u]) {
-        isWhite[u] = true;
-        ++whiteNum;
+    if (!isFestive[u]) {
+        isFestive[u] = true;
+        ++festiveNum;
     } else return;
     while (true) {
         int t = tree[idx[top[u]]];
@@ -208,8 +208,7 @@ void update(int u)
 
 void query(int u)
 {
-    if (whiteNum == 0) puts("-1");
-    else if (isWhite[u]) puts("0");
+    if (isFestive[u]) puts("0");
     else {
         int d = 0;
         int ans = INF;
@@ -259,4 +258,36 @@ int main()
 1 3
 2 3
 2 4
+
+15 100
+1 2
+1 3
+2 4
+2 5
+3 6
+3 7
+4 8
+4 9
+5 10
+5 11
+6 12
+6 13
+7 14
+7 15
+
+15 100
+1 2
+1 3
+1 4
+1 5
+1 6
+2 7
+2 8
+3 9
+9 10
+9 11
+10 15
+5 12
+12 13
+6 14
 */

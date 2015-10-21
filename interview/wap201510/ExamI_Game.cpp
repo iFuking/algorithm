@@ -23,7 +23,7 @@ int maxScore(vector<vector<int> > &grid){
 				continue;
 			}
 			if (j == 0){
-				if (dp[j][i - 1] < 0){    //探测最顶部点是否可达
+				if (dp[j][i - 1] < 0){
 					cand1[j] = -1;
 					for (int s = row - 1; s > 0; s--){
 						if (dp[s][i - 1] >= 0 && grid[s][i - 1] >= 0){
@@ -58,7 +58,7 @@ int maxScore(vector<vector<int> > &grid){
 				continue;
 			}
 			if (j == row - 1){
-				if (dp[j][i - 1] < 0){   //探测最底部点是否可达
+				if (dp[j][i - 1] < 0){
 					cand2[j] = -1;
 					for (int s = 0; s < row - 1; s++){
 						if (dp[s][i - 1] >= 0 && grid[s][i - 1] >= 0){

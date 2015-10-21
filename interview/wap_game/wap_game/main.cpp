@@ -1,58 +1,63 @@
 #include <iostream>
 #include <cstring>
+#include <cstdio>
+#include <vector>
+#include <cmath>
+#include <map>
+#include <algorithm>
 using namespace std;
 
-const int maxn = 501;
-const int dir[][2] = {
-	{-1, 0}, {1, 0}, {0, 1} 
-};                     // up, down and right 
-int n, m;              // rows and columns
-int v[maxn][maxn];     // grid value
-bool visit[maxn][maxn];  // if visited
+int grid[501][501];
+bool vis[501][501];
+int m, n;
+long long ans = -1;
+int cx[] = {-1, 0, 1};
+int cy[] = {0, 1, 0};
 
-void readin()
-{
-	cin >> n >> m;
-	memset(v, 0, sizeof(v));  // clear v[][]
+void dfs(long long sum, int x, int y) {
+    if (y == n - 1 && sum > ans) {
+        ans = sum;
+    }
 
-	// readin grid value
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < m; j++)
-			cin >> v[i][j];
-	return;
+    for (int i = 0; i < 3; ++i) {
+        bool flag = false;
+        int nx = x + cx[i];
+        if (nx == -1) {
+            nx = m - 1;
+            flag = true;
+        }
+        if (nx == m) {
+            nx = 0;
+            flag = true;
+        }
+        int ny = y + cy[i];
+        if (ny == n) continue;
+        if (vis[nx][ny] || grid[nx][ny] == -1) continue;
+        vis[nx][ny] = true;
+        if (flag)
+            dfs(grid[nx][ny], nx, ny);
+        else
+            dfs(sum + grid[nx][ny], nx, ny);
+        vis[nx][ny] = false;
+    }
 }
 
-void dfs(int row, int col)
-{
-	for (int i = 0; i < 3; i++)
-	{
-		int r = row + dir[i][0];
-		int c = col + dir[i][1];
+int main() {
+	FILE *fp = NULL;
+	fp = fopen("../../wap201510/ex1_testcase.txt", "r");
+    fscanf(fp, "%d%d", &m, &n);
+    for (int i = 0; i < m; ++i)
+        for (int j = 0; j < n; ++j)
+            fscanf(fp, "%d", &grid[i][j]);
+    memset(vis, false, sizeof(vis));
 
-		if (r < 0) r = n-1;      // teleport to the bottom
-		else if (r >= n) r = 0;  // teleport to the top
-
-		if (c < m && !visit[r][c])
-		{
-			visit[r][c] = true;
-			dfs(r, c);
-		}
-	}
-	return;
-}
-
-void solve()
-{
-	for (int i = 0; i < n; i++) dfs(i, 0);
-	return;
-}
-
-int main(int argc, char *argv[])
-{
-	while (true)
-	{
-		readin();
-		solve();
-	}
-	return 0;
+    for (int i = 0; i < m; ++i) {
+        if (grid[i][0] == -1)
+            continue;
+        vis[i][0] = true;
+        dfs(grid[i][0], i, 0);
+        vis[i][0] = false;
+    }
+    printf("%lld\n", ans);
+    return 0;
 }

@@ -28,7 +28,7 @@ void dfs_1(int s, int f){
 	}son[s] = p;
 }
 
-void update(int p, int rt, int x){ //pÆ«ÒÆÁ¿£¬ rtÏß¶ÎÊ÷ÖĞÎ»ÖÃ£¬ xÖØÁ´ÖĞÎ»ÖÃ
+void update(int p, int rt, int x){
 	int root = rt + p, lroot = p + (rt << 1), rroot = p + (rt << 1 | 1);
 	int l = le[root], r = ri[root], mid = (l + r) >> 1;
 	if (l == x && r == x){
@@ -65,7 +65,7 @@ void update(int p, int rt, int x){ //pÆ«ÒÆÁ¿£¬ rtÏß¶ÎÊ÷ÖĞÎ»ÖÃ£¬ xÖØÁ´ÖĞÎ»ÖÃ
 	}
 }
 
-int queryl(int p, int rt, int l, int r){ //pÆ«ÒÆÁ¿£¬ rtÏß¶ÎÊ÷ÖĞ±àºÅ£¬ lÇø¼ä×ó±ß½ç£¬ rÇø¼äÓÒ±ß½ç
+int queryl(int p, int rt, int l, int r){
 	int root = p + rt;
 	int mid = (le[root] + ri[root]) >> 1;
 	if (l == le[root] && r == ri[root])
@@ -82,7 +82,7 @@ int queryl(int p, int rt, int l, int r){ //pÆ«ÒÆÁ¿£¬ rtÏß¶ÎÊ÷ÖĞ±àºÅ£¬ lÇø¼ä×ó±ß½
 	}
 }
 
-int queryr(int p, int rt, int l, int r){ //pÆ«ÒÆÁ¿£¬ rtÏß¶ÎÊ÷ÖĞ±àºÅ£¬ rÇø¼äÓÒ±ß½ç
+int queryr(int p, int rt, int l, int r){
 	int root = p + rt;
 	int mid = (le[root] + ri[root]) >> 1;
 	if (l == le[root] && r == ri[root])

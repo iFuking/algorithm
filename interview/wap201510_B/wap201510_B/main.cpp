@@ -1,7 +1,6 @@
 #include <cstdio>
 #include <set>
 #include <cstring>
-#include <algorithm>
 using namespace std;
 const int maxn = 1e5 + 10;
 const int INF = 0x3f3f3f3f;
@@ -14,6 +13,8 @@ int cluster[maxn], father[maxn], kid[maxn];
 int top[maxn], idx[maxn], pos[maxn];
 int festiveNum;
 bool isFestive[maxn];
+
+inline int min(int x, int y) { return x<y ? x : y; }
 
 inline int getD(int u)
 {
@@ -71,6 +72,7 @@ void pushUp(int x)
 	return;
 }
 
+// build tree
 int buildTree(int l, int r)
 {
     int x = nodeNum++;
@@ -84,6 +86,7 @@ int buildTree(int l, int r)
     return x;
 }
 
+// update tree recursively, keep balanced
 void updateTree(int x, int pos)
 {
     if (node[x].l == node[x].r) { initNode(x); return; }
@@ -94,6 +97,7 @@ void updateTree(int x, int pos)
 	return;
 }
 
+// query for left tree, binary search, recursively
 int queryTreeL(int x, int l, int r)
 {
     if (node[x].l==l && node[x].r==r) return node[x].minL;
@@ -105,6 +109,7 @@ int queryTreeL(int x, int l, int r)
     return min(lmin, rmin + mid + 1 - l);
 }
 
+// query for right tree, binary search, recursively
 int queryTreeR(int x, int l, int r)
 {
     if (node[x].l==l && node[x].r==r) return node[x].minR;
@@ -116,6 +121,7 @@ int queryTreeR(int x, int l, int r)
     return min(rmin, lmin + r - mid);
 }
 
+// union-find structure
 void initRelation(int u, int f = -1)
 {
     cluster[u] = 1;
@@ -183,6 +189,7 @@ void init()
 	return;
 }
 
+// update operation, update tree at the same time
 void update(int u)
 {
     if (!isFestive[u]) {
@@ -206,6 +213,7 @@ void update(int u)
 	return;
 }
 
+// query operation, and print the result
 void query(int u)
 {
     if (isFestive[u]) puts("0");
@@ -230,19 +238,18 @@ void query(int u)
 int main()
 {
     int u, v;
-    while (~scanf("%d %d", &n, &m)) {
-        init();
-        for (int i = 1; i < n; ++i) {
-            scanf("%d %d", &u, &v);
-            addEdge(u, v);
-        }
-        initHeavy();
-        buildTrees();
-        while (m--) {
-            scanf("%d %d", &u, &v);
-            if (u == 1) update(v);
-            else query(v);
-        }
+    scanf("%d %d", &n, &m);
+    init();
+    for (int i = 1; i < n; ++i) {
+        scanf("%d %d", &u, &v);
+        addEdge(u, v);
+    }
+    initHeavy();
+    buildTrees();
+    while (m--) {
+        scanf("%d %d", &u, &v);
+        if (u == 1) update(v);
+        else query(v);
     }
     return 0;
 }

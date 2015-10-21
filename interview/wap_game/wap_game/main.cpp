@@ -43,12 +43,16 @@ void dfs(long long sum, int x, int y) {
 }
 
 int main() {
-	FILE *fp = NULL;
+	/*FILE *fp = NULL;
 	fp = fopen("../../wap201510/ex1_testcase.txt", "r");
     fscanf(fp, "%d%d", &m, &n);
     for (int i = 0; i < m; ++i)
         for (int j = 0; j < n; ++j)
-            fscanf(fp, "%d", &grid[i][j]);
+            fscanf(fp, "%d", &grid[i][j]);*/
+    scanf("%d%d", &m, &n);
+    for (int i = 0; i < m; ++i)
+        for (int j = 0; j < n; ++j)
+            scanf("%d", &grid[i][j]);
     memset(vis, false, sizeof(vis));
 
     for (int i = 0; i < m; ++i) {

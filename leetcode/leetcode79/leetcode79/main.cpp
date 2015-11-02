@@ -8,11 +8,12 @@ const int maxn = 1e3 + 10;
 int dir[][2] = {
 	{-1, 0}, {0, 1}, {1, 0}, {0, -1}
 };
-vector<char> w;
-bool visit[maxn][maxn], is_find;
 
 class Solution {
 public:
+	vector<char> w;
+	bool visit[maxn][maxn], is_find;
+
 	void dfs(int row, int col, int index, vector<vector<char>>& board, string &word)
 	{
 		if (w.size() == word.length()) { is_find = true; return; }

@@ -11,7 +11,6 @@ public:
 		if (nums.size() < 3) return res;
 
 		sort(nums.begin(), nums.end());
-		set<vector<int>> ans;
 		for (int i = 0; i < nums.size()-2; ++i) {
 			if (i>0 && nums[i]==nums[i-1]) continue;
 
@@ -27,15 +26,12 @@ public:
 					triple.push_back(nums[i]);
 					triple.push_back(nums[head]);
 					triple.push_back(nums[tail]);
-					ans.insert(triple);
+					res.push_back(triple);
 					while (++head<tail && nums[head]==nums[head-1]) ;
 					while (head<--tail && nums[tail]==nums[tail+1]) ;
 				}
 			}
 		}
-
-		set<vector<int>>::iterator iter = ans.begin();
-		for ( ; iter != ans.end(); ++iter) res.push_back(*iter);
 		return res;
 	}
 };

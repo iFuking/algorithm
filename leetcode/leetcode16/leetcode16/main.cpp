@@ -21,7 +21,6 @@ public:
 					while (head<--tail && nums[tail]==nums[tail+1]) ;
 				} else return target;
 				if (close < closest) { closest = close; ans = three_sum; }
-				else break;
 			}
 		}
 		return ans;

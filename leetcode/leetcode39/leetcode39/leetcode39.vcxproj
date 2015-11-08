@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6871D7A7-B0C5-4E6C-8A4C-7E3D2FA47C37}</ProjectGuid>
-    <RootNamespace>leetcode228</RootNamespace>
+    <ProjectGuid>{8AD881C7-C5CA-47E7-B2D4-44095AC7689B}</ProjectGuid>
+    <RootNamespace>leetcode39</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

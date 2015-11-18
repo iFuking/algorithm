@@ -1,20 +1,26 @@
 #include <iostream>
+#include <string>
+#include <cctype>
 using namespace std;
 
-int mul(int a, int b)
-{
-	int ans = 0;
-	for (int i = 0; b; ++i, b>>=1) {
-		if (b&1) {
-			ans += (a<<i);
+class Solution {
+public:
+    bool isPalindrome(string s) {
+		if (s.length() == 0) return true;
+		int head = 0, tail = s.length()-1;
+		while (head < tail) {
+		    while (head<tail && !isalnum(s[head])) ++head;
+		    while (head<tail && !isalnum(s[tail])) --tail;
+		    if (tolower(s[head]) != tolower(s[tail])) return false;
+		    ++head; --tail;
 		}
-	}
-	return ans;
-}
+		return true;
+    }
+};
 
 int main()
 {
-	int a, b;
-	while (scanf("%d %d", &a, &b)) printf("%d\n", mul(a, b));
+	Solution sol;
+	sol.isPalindrome("abba");
 	return 0;
 }

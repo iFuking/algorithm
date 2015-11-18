@@ -9,9 +9,9 @@ public:
 		int m = t.length(), n = s.length();
 		vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
 
-		// dp[0][0] = 1;
+		dp[0][0] = 1;
 		for (int j = 1; j <= n; ++j) dp[0][j] = 1;
-		// for (int i = 1; i <= m; ++i) dp[i][0] = 0;
+		for (int i = 1; i <= m; ++i) dp[i][0] = 0;
 
 		for (int j = 1; j <= n; ++j) {
 			for (int i = 1; i <= m; ++i) {

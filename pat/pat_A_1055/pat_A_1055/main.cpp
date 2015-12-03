@@ -48,7 +48,7 @@ void solve()
 	for (int i = 1; i <= K; ++i) {
 		int M, a_min, a_max; scanf("%d %d %d", &M, &a_min, &a_max);
 		vector<PERSON> ans;
-		for (int j = b_search(a_min); j<105 && j<people.size() && people[j].age<=a_max; ++j) {
+		for (int j = b_search(a_min); j<people.size() && people[j].age<=a_max; ++j) {
 			ans.push_back(people[j]);
 		}
 		sort(ans.begin(), ans.end(), cmp);

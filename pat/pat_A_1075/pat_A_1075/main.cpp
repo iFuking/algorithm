@@ -2,40 +2,73 @@
 #include <string>
 #include <map>
 #include <vector>
-#include <set>
 #include <algorithm>
 using namespace std;
 
-const int maxk = 10;
-int N, K, M;
-int p[maxk];
-set<string> user_id;
+const int maxk = 6;
+int pro[maxk];
 
-struct CmpByKey{
-	bool operator()(const pair<string, int> &k1, const pair<string, int> &k2) {
-		if (k1.first != k2.first) return k1.first < k2.first;
-		return k1.second < k2.second;
-	}
-};
-map<pair<string, int>, vector<int>, CmpByKey> records;
-bool cmp_value(const int &x, const int &y) { return x > y; }
+typedef struct {
+	int rank;
+	string id;
+	int total_score;
+	int valid_nums;
+	map<int, int> pro_score;
+}RESULT;
+
+bool cmp(const RESULT &r1, const RESULT &r2)
+{
+	if (r1.total_score != r2.total_score) return r1.total_score > r2.total_score;
+	else if (r1.valid_nums != r2.valid_nums) return r1.valid_nums > r2.valid_nums;
+	return r1.id < r2.id;
+}
 
 void solve()
 {
-	cin >> N >> K >> M;
-	for (int i = 0; i < K; ++i) scanf("%d", &p[i]);
-	for (int i = 0; i < M; ++i)
-	{
-		string u_id; int p_id, score;
-		cin >> u_id; scanf("%d %d", &p_id, &score);
-		user_id.insert(u_id);
-		records[make_pair(u_id, p_id)].push_back(score);
+	int N, K, M; cin >> N >> K >> M;
+	for (int i = 0; i < K; ++i) scanf("%d", &pro[i]);
+	map<string, map<int, int>> record;
+	for (int i = 0; i < M; ++i) {
+		char id[maxk]; int pro_id, score; scanf("%s %d %d", id, &pro_id, &score);
+		if (score > record[id][pro_id]) record[id][pro_id] = score;
 	}
-	map<pair<string, int>, vector<int>, CmpByKey>::iterator iter = records.begin();
-	for ( ; iter != records.end(); ++iter) {
-		sort(iter->second.begin(), iter->second.end(), cmp_value);
+	
+	vector<RESULT> res;
+	map<string, map<int, int>>::iterator iter = record.begin();
+	for ( ; iter != record.end(); ++iter) {
+		RESULT r; r.id = iter->first;
+		r.total_score = 0; r.valid_nums = 0;
+		map<int, int>::iterator it = iter->second.begin();
+		for ( ; it != iter->second.end(); ++it) {
+			r.total_score += it->second;
+			if (pro[it->first-1] == it->second) ++r.valid_nums;
+		}
+		r.pro_score = iter->second;
+		res.push_back(r);
 	}
+	sort(res.begin(), res.end(), cmp);
 
+	res[0].rank = 1;
+	printf("%d %s %d ", res[0].rank, res[0].id.c_str(), res[0].total_score);
+	for (int i = 1; i < K; ++i) {
+		if (record[res[0].id].find(i)!=record[res[0].id].end()) printf("%d ", res[0].pro_score[i]);
+		else printf("- ");
+	}
+	if (record[res[0].id].find(K)!=record[res[0].id].end()) printf("%d\n", res[0].pro_score[4]);
+	else printf("-\n");
+
+	for (int i = 1; i < res.size(); ++i) {
+		if (res[i].total_score == 0) break;
+		if (res[i].total_score == res[i-1].total_score) res[i].rank = res[i-1].rank;
+		else res[i].rank = i+1;
+		printf("%d %s %d ", res[i].rank, res[i].id.c_str(), res[i].total_score);
+		for (int j = 1; j < 4; ++j) {
+			if (record[res[i].id].find(j)!=record[res[i].id].end()) printf("%d ", res[i].pro_score[j]);
+			else printf("- ");
+		}
+		if (record[res[i].id].find(K)!=record[res[i].id].end()) printf("%d\n", res[i].pro_score[4]);
+		else printf("-\n");
+	}
 	return;
 }
 

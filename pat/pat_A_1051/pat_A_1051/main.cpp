@@ -17,7 +17,7 @@ void solve()
 		{
 			st.push(i);
 			if (st.size() > M) break;
-			while (st.size()>0 && st.top()==seq[cnt]) { st.pop(); seq[++cnt]; }
+			while (st.size()>0 && st.top()==seq[cnt]) { st.pop(); ++cnt; }
 		}
 		if (cnt == N) printf("YES\n");
 		else printf("NO\n");

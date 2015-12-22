@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1450785589 source:/home/dick/algorithm/leetcode/leetcode78/subset1.cpp
+	<iostream>
+	<vector>
+

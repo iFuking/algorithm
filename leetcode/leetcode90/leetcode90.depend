@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1450787881 source:/home/dick/algorithm/leetcode/leetcode90/subset_dup.cpp
+	<iostream>
+	<vector>
+	<cstdio>
+	<algorithm>
+	<set>
+

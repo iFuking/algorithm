@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1451024196 source:/home/dick/algorithm/leetcode/leetcode122/stock2.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+

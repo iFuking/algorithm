@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cstdio>
 using namespace std;
 
 const int maxn = 1e6 + 10;

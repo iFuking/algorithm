@@ -25,9 +25,9 @@ string longest_common_substring(string &s, string &t)
     return s.substr(index-maxlen+1, maxlen);
 }
 
-int main()
-{
-    string s, t; cin >> s >> t;
-    cout << longest_common_substring(s, t) << endl;
-    return 0;
-}
+//int main()
+//{
+//    string s, t; cin >> s >> t;
+//    cout << longest_common_substring(s, t) << endl;
+//    return 0;
+//}

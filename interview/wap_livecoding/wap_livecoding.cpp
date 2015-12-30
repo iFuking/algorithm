@@ -1,10 +1,9 @@
 #include <iostream>
-#include <cstdio>
 #include <string>
 #include <algorithm>
 using namespace std;
 
-bool has_nextpermutation(string &s)
+bool has_permutation(string &s)
 {
     for (int i = s.length()-2; i >= 0; --i) {
         int ii = i+1;
@@ -21,12 +20,12 @@ bool has_nextpermutation(string &s)
     return false;
 }
 
-//int main()
-//{
-//    string s = "qwertyuiopasdfghjkl";
-//    sort(s.begin(), s.end());
-//    do {
-//        // cout << s << endl;
-//    } while (has_nextpermutation(s));
-//    return 0;
-//}
+int main()
+{
+    string s; cin >> s;
+    sort(s.begin(), s.end());
+    do {
+        cout << s << endl;
+    } while (has_permutation(s));
+    return 0;
+}

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1451442648 source:/home/dick/algorithm/leetcode/leetcode228/sum_ranges.cpp
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+

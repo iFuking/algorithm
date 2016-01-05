@@ -4,49 +4,48 @@ using namespace std;
 
 //class Solution {
 //public:
-//    int find_pivot(vector<int>& nums)
+//    int find_pivot_left(vector<int>& nums)
 //    {
 //        int left = 0, right = nums.size()-1;
 //        while (left <= right) {
-//            int mid = (left+right)>>1;
+//            int mid = (left+right) >> 1;
 //            if (nums[mid] > nums[right]) left = mid+1;
 //            else if (nums[mid] < nums[right]) right = mid;
-//            else return mid;
+//            else --right;
 //        }
-//        return -1;
+//        return left;
 //    }
 //
-//    int b_search(vector<int>& nums, int left, int right, int target)
+//    bool b_search(vector<int>& nums, int left, int right, int target)
 //    {
 //        while (left <= right) {
-//            int mid = (left+right)>>1;
+//            int mid = (left+right) >> 1;
 //            if (nums[mid] < target) left = mid+1;
 //            else if (nums[mid] > target) right = mid-1;
-//            else return mid;
+//            else return true;
 //        }
-//        return -1;
+//        return false;
 //    }
 //
-//    int search(vector<int>& nums, int target) {
-//        int pivot = find_pivot(nums)-1;
-//        // cout << pivot << endl;
+//    bool search(vector<int>& nums, int target) {
+//        int pivot = find_pivot_left(nums);
 //
-//        int in_left = b_search(nums, 0, pivot, target);
-//        int in_right = b_search(nums, pivot+1, nums.size()-1, target);
-//
-//        if (in_left >= 0) return in_left;
-//        return in_right;
+//        bool in_left = b_search(nums, 0, pivot-1, target);
+//        if (in_left) return true;
+//        return b_search(nums, pivot, nums.size()-1, target);
 //    }
 //};
 
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
+    bool search(vector<int>& nums, int target) {
         int left = 0, right = nums.size()-1;
         while (left <= right) {
-            int mid = (left+right) >> 1;
-            if (nums[mid] == target) return mid;
+            while (left<right && nums[left]==nums[left+1]) ++left;
+            while (left<right && nums[right]==nums[right-1]) --right;
 
+            int mid = (left+right) >> 1;
+            if (nums[mid] == target) return true;
             if (nums[mid] > nums[right]) {
                 if (target>=nums[left] && target<nums[mid]) right = mid-1;
                 else left = mid+1;
@@ -58,15 +57,15 @@ public:
                 else left = mid+1;
             }
         }
-        return -1;
+        return false;
     }
 };
 
 int main()
 {
-    int a[] = {1, 3, 5};
-    vector<int> v(a, a+sizeof(a)/sizeof(a[0]));
-    Solution sol;
-    cout << sol.search(v, 1) << endl;
+	int a[] = {3, 1};
+	vector<int> v(a, a+sizeof(a)/sizeof(a[0]));
+	Solution sol;
+	cout << sol.search(v, 1) << endl;
 	return 0;
 }

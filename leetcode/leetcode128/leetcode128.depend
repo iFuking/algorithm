@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1452064140 source:/home/dick/algorithm/leetcode/leetcode128/main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<queue>
+

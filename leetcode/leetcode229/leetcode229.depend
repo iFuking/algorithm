@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1451471619 source:/home/dick/algorithm/leetcode/leetcode229/majo_ele.cpp
+	<iostream>
+	<vector>
+

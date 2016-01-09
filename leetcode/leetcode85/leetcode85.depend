@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1452311023 source:/home/dick/algorithm/leetcode/leetcode85/max_rectangle.cpp
+	<iostream>
+	<vector>
+	<stack>
+

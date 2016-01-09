@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1451472554 source:/home/dick/algorithm/leetcode/leetcode283/mv_zero.cpp
+	<iostream>
+	<vector>
+

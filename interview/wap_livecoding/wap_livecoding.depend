@@ -1,11 +1,10 @@
 # depslib dependency file v1.0
-1450767007 source:/home/dick/algorithm/interview/wap_livecoding/wap_livecoding.cpp
+1451039798 source:/home/dick/algorithm/interview/wap_livecoding/wap_livecoding.cpp
 	<iostream>
-	<cstdio>
 	<string>
 	<algorithm>
 
-1450769970 source:/home/dick/algorithm/interview/wap_livecoding/lcs.cpp
+1451039822 source:/home/dick/algorithm/interview/wap_livecoding/lcs.cpp
 	<iostream>
 
 1450768190 source:/home/dick/algorithm/interview/wap_livecoding/lis.cpp

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1451402077 source:/home/dick/algorithm/leetcode/leetcode153/main.cpp
+	<iostream>
+	<vector>
+

@@ -4,7 +4,6 @@ using namespace std;
 
 const int maxn = 1e6 + 10;
 long long euler[maxn];
-long long f[maxn];
 const int M = 10007;
 
 class GcdAndPhi {
@@ -28,7 +27,6 @@ public:
 
 	long long fn(int n)
 	{
-		if (f[n]) return f[n];
 		long long sum = 0L;
 		for (int i = 1; i <= n; ++i) {
 			for (int j = 1; j < i; ++j) {

@@ -67,22 +67,32 @@ using namespace std;
 
 class Solution {
 public:
-    int ladderLength(string beginWord, string endWord, unordered_set<string>& wordList) {
+    int ladderLength(string beginWord, string endWord, set<string>& wordList) {
         wordList.insert(beginWord); wordList.insert(endWord);
-        queue<pair<string, int> > q; q.push(make_pair(beginWord, 1));
+
+        int head = 0, tail = 1, tp_tail = tail;
+        int dist = 1;
+
+        queue<string> q; q.push(beginWord);
         wordList.erase(beginWord);
+
         while (!q.empty()) {
-            pair<string, int> frnt = q.front(); q.pop();
-            for (int i = 0; i < frnt.first.length(); ++i) {
-                for (char ch = 'a'; ch <= 'z'; ++ch) {
-                    string word = frnt.first; word[i] = ch;
-                    if (wordList.find(word) != wordList.end()) {
-                        if (word == endWord) return frnt.second+1;
-                        q.push(make_pair(word, frnt.second+1));
-                        wordList.erase(word);
+            ++dist;
+            while (head < tail) {
+                string frnt = q.front(); q.pop(); ++head;
+                for (int i = 0; i < frnt.length(); ++i) {
+                    for (char ch = 'a'; ch <= 'z'; ++ch) {
+                        string word = frnt; word[i] = ch;
+                        if (wordList.find(word) != wordList.end()) {
+                            if (word == endWord) return dist;
+                            q.push(word);
+                            wordList.erase(word);
+                            ++tp_tail;
+                        }
                     }
                 }
             }
+            tail = tp_tail;
         }
         return 0;
     }

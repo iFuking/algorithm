@@ -3,62 +3,68 @@
 #include <set>
 #include <string>
 #include <map>
+#include <queue>
 using namespace std;
 
 class Solution {
 public:
     vector<vector<string> > ladders;
 
-    bool diff_one(const string &w1, const string &w2)
-    {
-        if (w1.length() != w2.length()) return false;
-        int diff_cnt = 0;
-        for (int i = 0; i < w1.length(); ++i) {
-            if (w1[i] != w2[i]) ++diff_cnt;
-            if (diff_cnt > 1) return false;
+    bool find_path(const string beginWord, const string endWord, set<string>& wordList, map<string, vector<string> > &path) {
+        int head = 0, tail = 1, tp_tail = tail;
+        queue<string> q; q.push(beginWord); wordList.erase(beginWord);
+        while (!q.empty()) {
+            bool reach = false; vector<string> visit;
+            while (head < tail) {
+                string frnt = q.front(); q.pop(); ++head;
+                for (int i = 0; i < frnt.length(); ++i) {
+                    for (char ch = 'a'; ch <= 'z'; ++ch) {
+                        string word = frnt; word[i] = ch;
+                        if (wordList.find(word) != wordList.end()) {
+                            if (word == endWord) reach = true;
+                            path[word].push_back(frnt);
+                            visit.push_back(word);
+                            q.push(word);
+                            ++tp_tail;
+                        }
+                    }
+                }
+            }
+            if (reach) return true;
+            for (int i = 0; i < visit.size(); ++i) wordList.erase(visit[i]);
+            tail = tp_tail;
         }
-        return true;
+        return false;
     }
 
-    void dfs(const string &word, const string &endWord, map<string, int> &word_map, vector<bool> &visit, vector<string> &ladder)
+    void swap(string &s1, string &s2)
     {
-        if (ladders.size()>0 && ladder.size()>ladders[0].size()) return;
-        if (word == endWord) {
-            if (ladders.size()>0 && ladder.size()<ladders[0].size()) ladders.clear();
+        string s = s1; s1 = s2; s2 = s;
+        return;
+    }
+
+    void back_trace_path(const string &word, const string &beginWord, map<string, vector<string> > &path, vector<string> &ladder)
+    {
+        if (word == beginWord) {
+            for (int i = 0; i < ladder.size()/2; ++i) swap(ladder[i], ladder[ladder.size()-1-i]);
             ladders.push_back(ladder);
-            // for (int i = 0; i < ladder.size(); ++i) cout << ladder[i] << " ";
-            // cout << endl;
             return;
         }
-        map<string, int>::iterator iter = word_map.begin();
-        for ( ; iter != word_map.end(); ++iter) {
-            if (!visit[iter->second] && diff_one(word, iter->first)) {
-                // string new_word = iter->first;
-                ladder.push_back(iter->first);
-                visit[iter->second] = true;
-                dfs(iter->first, endWord, word_map, visit, ladder);
-                visit[iter->second] = false;
-                ladder.pop_back();
-            }
+        vector<string>::iterator iter = path[word].begin();
+        for ( ; iter != path[word].end(); ++iter) {
+            ladder.push_back(*iter);
+            back_trace_path(*iter, beginWord, path, ladder);
+            ladder.pop_back();
         }
         return;
     }
 
-    vector<vector<string> > findLadders(string beginWord, string endWord, unordered_set<string> &wordList) {
+    vector<vector<string> > findLadders(string beginWord, string endWord, set<string> &wordList) {
         wordList.insert(beginWord); wordList.insert(endWord);
-        map<string, int> word_map; vector<string> ladder;
-        unordered_set<string>::iterator iter = wordList.begin();
-        for (int i = 0; iter != wordList.end(); ++iter) {
-            word_map[*iter] = i++;
-            // cout << *iter << " " << word_map[*iter] << ", ";
-        }
-        // cout << endl;
-//        map<string, int>::iterator it = word_map.begin();
-//        cout << it->first << " " << it->second << endl;
-
-        vector<bool> visit(wordList.size(), false);
-        visit[word_map[beginWord]] = true; ladder.push_back(beginWord);
-        dfs(beginWord, endWord, word_map, visit, ladder);
+        map<string, vector<string> > path;
+        if (!find_path(beginWord, endWord, wordList, path)) return ladders;
+        vector<string> ladder; ladder.push_back(endWord);
+        back_trace_path(endWord, beginWord, path, ladder);
         return ladders;
     }
 };

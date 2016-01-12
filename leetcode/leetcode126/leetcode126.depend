@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1452482723 source:/home/dick/algorithm/leetcode/leetcode126/word_ladder2.cpp
+	<iostream>
+	<vector>
+	<set>
+	<string>
+	<map>
+	<queue>
+

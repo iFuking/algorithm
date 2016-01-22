@@ -11,7 +11,20 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-		
+		ListNode *h = new ListNode(10000007);
+		h->next = head;
+		n -= m;
+
+		ListNode *pm = h;
+		while (--m) pm = pm->next;
+		ListNode *p = pm->next;
+		while (n--) {
+			ListNode *next = p->next;
+			p->next = next->next;
+			next->next = pm->next;
+			pm->next = next;
+		}
+		return h->next;
     }
 };
 

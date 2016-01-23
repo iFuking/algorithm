@@ -50,30 +50,47 @@ struct ListNode {
 //    }
 //};
 
+//class Solution {
+//public:
+//    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+//        if (!l1) return l2;
+//		if (!l2) return l1;
+//
+//		ListNode *head = new ListNode(0x80000000);
+//		head->next = l1; l1 = head;
+//		ListNode *pre_l1 = NULL, *pre_l2 = NULL;
+//		while (l1 && l2) {
+//			if (l1->val <= l2->val) { pre_l1 = l1; l1 = l1->next; continue; }
+//			ListNode *tmp = l1;
+//			pre_l1->next = l2;
+//			l1 = l2;
+//			l2 = tmp;
+//		}
+//		if (!l1) pre_l1->next = l2; 
+//		return head->next;
+//    }
+//};
+
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if (!l1) return l2;
-		else if (!l2) return l1;
+		if (!l2) return l1;
 
-		ListNode *head = new ListNode(0x80000000);
-		head->next = l1; l1 = head;
-		ListNode *pre_l1 = NULL, *pre_l2 = NULL;
-		while (l1 && l2) {
-			if (l1->val <= l2->val) { pre_l1 = l1; l1 = l1->next; continue; }
-			ListNode *tmp = l1;
-			pre_l1->next = l2;
-			l1 = l2;
-			l2 = tmp;
+		if (l1->val < l2->val) {
+			l1->next = mergeTwoLists(l1->next, l2);
+			return l1;
+		} else {
+			l2->next = mergeTwoLists(l1, l2->next);
+			return l2;
 		}
-		if (!l1) pre_l1->next = l2; 
-		return head->next;
+		return NULL;
     }
 };
 
 int main()
 {
-	int a[] = {5};
+	int a[] = {1, 3, 5};
 	ListNode *l1 = NULL;
 	for (int i = sizeof(a)/sizeof(a[0])-1; i >= 0; --i) {
 		ListNode *node = new ListNode(a[i]);

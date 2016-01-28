@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1453977166 source:/home/dick/cppProject/leetcode/leetcode297/seri_dese.cpp
+	<iostream>
+	<vector>
+	<queue>
+	<cstdlib>
+

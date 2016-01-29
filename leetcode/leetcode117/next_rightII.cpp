@@ -12,6 +12,7 @@ class Solution {
 public:
     void connect(TreeLinkNode *root) {
         if (!root) return;
+        if (!root->left && !root->right) return;
 
         connect(root->left);
         connect(root->right);

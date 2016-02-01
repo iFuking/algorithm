@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1454318919 source:/home/dick/cppProject/leetcode/leetcode200/nums_island.cpp
+	<iostream>
+	<vector>
+

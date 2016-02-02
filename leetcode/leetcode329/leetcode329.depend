@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1454379526 source:/home/dick/cppProject/leetcode/leetcode329/lip_matrix.cpp
+	<iostream>
+	<vector>
+

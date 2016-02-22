@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1456132693 source:/home/dick/cppProject/leetcode/leetcode202/happy_number.cpp
+	<iostream>
+	<set>
+

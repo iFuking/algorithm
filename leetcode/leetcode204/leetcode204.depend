@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1456134691 source:/home/dick/cppProject/leetcode/leetcode204/cnt_primes.cpp
+	<iostream>
+	<cmath>
+	<vector>
+	<cstdio>
+

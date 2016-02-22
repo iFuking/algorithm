@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1455873740 source:/home/dick/cppProject/nowcoder/ease_net2016_A/main.cpp
+	<iostream>
+	<cstdio>
+

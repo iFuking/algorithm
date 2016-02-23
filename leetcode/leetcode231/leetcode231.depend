@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1456219816 source:/home/dick/cppProject/leetcode/leetcode231/pow_of_two.cpp
+	<iostream>
+	<cmath>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1456379968 source:/home/dick/cppProject/leetcode/leetcode224/basic_calcu.cpp
+	<iostream>
+	<stack>
+	<vector>
+

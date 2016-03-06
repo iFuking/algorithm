@@ -3,8 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-bool has_permutation(string &s)
-{
+bool has_next_permutation(string &s) {
     for (int i = s.length()-2; i >= 0; --i) {
         int ii = i+1;
         if (s[i] < s[ii]) {
@@ -20,12 +19,11 @@ bool has_permutation(string &s)
     return false;
 }
 
-int main()
-{
+int main() {
     string s; cin >> s;
     sort(s.begin(), s.end());
     do {
         cout << s << endl;
-    } while (has_permutation(s));
+    } while (has_next_permutation(s));
     return 0;
 }

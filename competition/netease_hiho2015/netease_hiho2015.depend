@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1458224071 source:/home/dick/cppProject/competition/netease_hiho2015/push_box.cpp
+	<iostream>
+	<vector>
+	<cstdio>
+

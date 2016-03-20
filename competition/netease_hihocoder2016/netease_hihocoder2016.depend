@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1458305118 source:/home/dick/cppProject/competition/netease_hihocoder2016/main.cpp
+	<iostream>
+	<vector>
+	<set>
+	<cctype>
+	<cstring>
+	<cstdio>
+

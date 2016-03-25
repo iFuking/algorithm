@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1458832281 source:/home/dick/cppProject/competition/huawei2016_live_coding/poker.cpp
+	<iostream>
+	<cstdio>
+	<cctype>
+	<algorithm>
+	<vector>
+

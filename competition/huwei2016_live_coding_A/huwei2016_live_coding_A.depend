@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1458743379 source:/home/dick/cppProject/competition/huwei2016_live_coding_A/course_op.cpp
+	<iostream>
+	<cstdio>
+

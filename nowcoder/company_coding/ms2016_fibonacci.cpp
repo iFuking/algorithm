@@ -42,15 +42,13 @@ void solve() {
 
 	int ans = 0;
 	for (int i = 1; i <= m; ++i) {
-		int tmp_max = -1;
 		for (int j = 1; j <= n; ++j) {
 			dp[i][j] = dp[i][j-1];
 			if (fib[i-1] == a[j-1]) {
-				dp[i][j] += dp[i-1][j-1];
+				dp[i][j] = (dp[i][j]+dp[i-1][j-1])%M;
 			}
-			tmp_max = max(tmp_max, dp[i][j]);
 		}
-		ans = (ans+tmp_max)%M;
+		ans = (ans+dp[i][n])%M;
 	}
 	printf("%d\n", ans);
 	return;

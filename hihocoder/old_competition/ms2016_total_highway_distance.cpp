@@ -7,12 +7,12 @@ using namespace std;
 
 int N, M;
 
-void dfs(const int &u, const int &v, vector<int> &visit, map<int, vector<int> > &adj, int &cnt) {
+void dfs(const int &u, vector<int> &visit, map<int, vector<int> > &adj, int &cnt) {
 	visit[u] = true;
 	vector<int>::const_iterator iter = adj[u].begin();
 	for ( ; iter != adj[u].end(); ++iter) {
-		if (*iter!=v && !visit[*iter]) {
-			dfs(*iter, v, visit, adj, ++cnt);
+		if (!visit[*iter]) {
+			dfs(*iter, visit, adj, ++cnt);
 		}
 	}
 	return;
@@ -24,7 +24,8 @@ long long query(map<pair<int, int>, int> &edge, map<int, vector<int> > &adj) {
 	for ( ; iter != edge.end(); ++iter) {
 		vector<int> visit(N, false);
 		int u = iter->first.first, v = iter->first.second, cnt = 1;
-		dfs(u, v, visit, adj, cnt);
+		visit[v] = true;
+		dfs(u, visit, adj, cnt);
 		thd += cnt*(N-cnt)*iter->second;
 	}
 	return thd;

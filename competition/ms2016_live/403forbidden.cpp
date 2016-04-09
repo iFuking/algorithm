@@ -8,7 +8,7 @@ using namespace std;
 
 struct RULE {
     bool access;
-    long long ip;
+    unsigned int ip;
     int mask;
 };
 
@@ -24,7 +24,7 @@ const int maxs = 1e2 + 10;
 int N, M;
 RULE rules[maxn];
 
-void getAddress(string address, long long &ip, int &mask) {
+void getAddress(string address, unsigned int &ip, int &mask) {
     mask = -1; ip = 0;
     int head = 0;
     for (int i = 0; i < address.length(); i++) {
@@ -50,7 +50,11 @@ TreeNode *addRule() {
     for (int i = N-1; i >= 0; --i) {
         TreeNode *node = root;
 
-        for (int j = 31; j >= 31-rules[i].mask; --j) {
+        if (rules[i].mask == -1) {
+            rules[i].mask = 32;
+        }
+
+        for (int j = 31; j >= 32-rules[i].mask; --j) {
             if (rules[i].ip & (1U<<j)) {
                 if (node->right == NULL) {
                     node->right = new TreeNode();
@@ -72,7 +76,7 @@ TreeNode *addRule() {
     return root;
 }
 
-void check2(bool &response, long long ip, TreeNode *root) {
+void check2(bool &response, unsigned int ip, TreeNode *root) {
     TreeNode *node = root;
 
     for (int i = 31; i >= 0; --i) {
@@ -90,10 +94,12 @@ void check2(bool &response, long long ip, TreeNode *root) {
             node = node->left;
         }
     }
+
+    response = node->val;
     return;
 }
 
-void check1(bool &response, long long ip) {
+void check1(bool &response, unsigned int ip) {
     for (int j = 0; j < N; j++) {
         if (rules[j].mask == -1 && rules[j].ip != ip) {
             continue;
@@ -127,7 +133,7 @@ int main(int argc, const char * argv[]) {
 
     for (int i = 0; i < M; i++) {
         char address[maxs];
-        long long ip;
+        unsigned int ip;
         int nothing;
 
         scanf("%s", address);

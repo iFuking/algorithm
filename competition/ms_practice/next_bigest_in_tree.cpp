@@ -28,11 +28,21 @@ int b_search(int n, vector<int> &v) {
 	return -1;
 }
 
+// int next_value(Node *tree, int val) {
+// 	vector<int> v;
+// 	inorder_search(tree, v);
+// 	int index = b_search(val, v);
+// 	return v[index+1];
+// }
+
 int next_value(Node *tree, int val) {
-	vector<int> v;
-	inorder_search(tree, v);
-	int index = b_search(val, v);
-	return v[index+1];
+	if (!tree) return -1;
+	if (tree->n <= val) {
+		return next_value(tree->right, val);
+	}
+
+	int left_value = next_value(tree->left, val);
+	return left_value==-1 ? tree->n : left_value;
 }
 
 int main() {

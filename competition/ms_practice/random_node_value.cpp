@@ -13,8 +13,8 @@ typedef struct node {
 
 void node_cnt(Node *root, map<Node*, int> &cnt) {
 	if (!root) return;
-	if (!root->left) node_cnt(root->left, cnt);
-	if (!root->right) node_cnt(root->right, cnt);
+	if (root->left) node_cnt(root->left, cnt);
+	if (root->right) node_cnt(root->right, cnt);
 	cnt[root] = cnt[root->left]+cnt[root->right]+1;
 	return;
 }

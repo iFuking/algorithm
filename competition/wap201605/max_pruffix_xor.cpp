@@ -33,7 +33,7 @@ void insert_trie(TrieNode *root, long long val) {
 	return;
 }
 
-long long max_pruffix_xor(TrieNode *root, long long val) {
+long long pruffix_xor(TrieNode *root, long long val) {
 	long long ans = 0;
 	TrieNode *p = root;
 	for (int b = BITSIZE-1; b >= 0; --b) {
@@ -79,7 +79,7 @@ void solve() {
 		cur_xor = 0;
 		for (int i = n-1; i >= 0; --i) {
 			cur_xor ^= a[i];
-			ans = max(ans, max_pruffix_xor(root, cur_xor));
+			ans = max(ans, pruffix_xor(root, cur_xor));
 		}
 		printf("%lld\n", ans);
 		free_mem(root);

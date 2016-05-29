@@ -1,6 +1,5 @@
 # depslib dependency file v1.0
-1459941771 source:/home/dick/cppProject/competition/c_test/main.cpp
+1464509818 source:/home/dick/cppProject/competition/c_test/main.cpp
 	<iostream>
-	<cstdio>
-	<algorithm>
+	<vector>
 

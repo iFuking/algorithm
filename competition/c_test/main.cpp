@@ -1,60 +1,30 @@
 #include <iostream>
 #include <vector>
-#include <cstdio>
 using namespace std;
 
-void merge(vector<int> &v1, vector<int> &v2, vector<int> &v) {
-	int i = 0, j = 0;
-	while (i<v1.size() && j<v2.size()) {
-		if (v1[i] < v2[j]) ++i;
-		else ++j;
-		v.push_back(min(v1[i], v2[j]));
-	}
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        vector<int> v(n); v[0] = 1;
 
-	if (i == v1.size()) {
-		while (j < v2.size()) {
-			v.push_back(v2[j++]);
-		}
-	}
-	if (j == v2.size()) {
-		while (i < v1.size()) {
-			v.push_back(v1[i++]);
-		}
-	}
-	return;
-}
+        int i2 = 0, i3 = 0, i5 = 0;
+        int f2 = 2, f3 = 3, f5 = 5;
+        int n2 = v[i2]*f2, n3 = v[i3]*f3, n5 = v[i5]*f5;
 
-vector<int> partition(int left, int right, vector<int> &v) {
-	if (left == right) return vector<int>(1, v[left]);
+        for (int i = 1; i < n; ++i) {
+        	v[i] = min(min(n2, n3), n5);
 
-	int mid = (left+right) >> 1;
-	vector<int> left_part = partition(left, mid, v);
-	vector<int> right_part = partition(mid+1, right, v);
+        	if (n2 == v[i]) n2 = v[++i2]*f2;
+        	if (n3 == v[i]) n3 = v[++i3]*f3;
+        	if (n5 == v[i]) n5 = v[++i5]*f5;
+        }
 
-	vector<int> sorted;
-	merge(left_part, right_part, sorted);
-
-	return sorted;
-}
-
-void merge_sort(vector<int> &v) {
-	v = partition(0, v.size()-1, v);
-	return;
-}
-
-void solve() {
-	int a[] = {22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 35, 9, 70};
-	vector<int> v(a, a+sizeof(a)/sizeof(a[0]));
-	merge_sort(v);
-
-	for (int i = 0; i < v.size(); ++i) {
-		printf("%d ", v[i]);
-	}
-	printf("\n");
-	return;
-}
+        return v[n-1];
+    }
+};
 
 int main() {
-	solve();
-	return 0;
+    Solution sol;
+    cout << sol.nthUglyNumber(9) << endl;
+    return 0;
 }

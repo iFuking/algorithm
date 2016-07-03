@@ -1,62 +1,90 @@
 #include <iostream>
+#include <cstdio>
+#include <string>
 using namespace std;
 
-bool table[6][6] = {0};
-int pieces_in_row[6] = {0};
-int pieces_in_col[6] = {0};
+const int maxn = 6;
+int row[maxn], col[maxn];
+bool visit[maxn][maxn];
 
-void dfs(int s, int &result)
-{
-    if (s == 36) {
-        for (int i = 0; i < 6; i++) {
-            if (pieces_in_row[i] != 3 || pieces_in_col[i] != 3)
-                return;
-        }
-        result++;
-        return;
+bool is_continue() {
+    for (int i = 0; i < maxn; ++i) {
+        if (row[i] < 0) return false;
+        if (col[i] < 0) return false;
     }
-    for (int i = 0; i < s/6; i++) {
-        if (pieces_in_row[i] != 3)
-            return;
-    }
-    if (!table[s/6][s%6] && pieces_in_row[s/6] < 3 && pieces_in_col[s%6] < 3) {
-        pieces_in_row[s/6]++;
-        pieces_in_col[s%6]++;
-        dfs(s+1, result);
-        pieces_in_row[s/6]--;
-        pieces_in_col[s%6]--;
-        dfs(s+1, result);
-    } else {
-        dfs(s+1, result);
-    }
+    return true;
 }
 
-int main()
-{
-    freopen("/Users/noosc/Desktop/input.txt","r",stdin);
-    freopen("/Users/noosc/Desktop/output.txt","w",stdout);
-    for (int i = 0; i < 6; i++) {
-        for (int j = 0; j < 6; j++) {
-            char c;
-            cin >> c;
-            if (c == 'o') {
-                table[i][j] = true;
-                pieces_in_row[i]++;
-                pieces_in_col[j]++;
-            } else {
-                table[i][j] = false;
+bool is_valid() {
+    for (int i = 0; i < maxn; ++i) {
+        if (row[i] != 0) return false;
+        if (col[i] != 0) return false;
+    }
+    return true;
+}
+
+// 0 <= pos < maxn*maxn
+// row: pos/maxn
+// col: pos%maxn
+void dfs(int pos, int &ans) {
+    if (pos == maxn*maxn) {
+        // each row and column has three pieces
+        if (!is_valid()) return;
+        ++ans;
+        return;
+    }
+
+    // previous rows must have meet the condition
+    // if not, no need to backtrace
+    for (int i = 0; i < pos/maxn; ++i) {
+        if (row[i] != 0) return;
+    }
+
+    // this position is '.', and satisfied row and column
+    if (!visit[pos/maxn][pos%maxn] && row[pos/maxn]>0 && col[pos%maxn]>0) {
+        // place a piece
+        --row[pos/maxn]; --col[pos%maxn];
+        dfs(pos+1, ans);
+        ++row[pos/maxn]; ++col[pos%maxn];
+
+        // do not place
+        dfs(pos+1, ans);
+        return;
+    }
+    
+    // ignore this position
+    dfs(pos+1, ans);
+    return;
+}
+
+void solve() {
+    for (int i = 0; i < maxn; ++i) {
+        row[i] = col[i] = 3;
+    }
+
+    char table[maxn][maxn];
+    for (int i = 0; i < maxn; ++i) {
+        for (int j = 0; j < maxn; ++j) {
+            scanf("%c", &table[i][j]);
+            if (table[i][j] == 'o') {
+                visit[i][j] = true;
+                --row[i]; --col[j];
             }
         }
+        getchar();
     }
-    int result = 0;
-    for (int i = 0; i < 6; i++) {
-        if (pieces_in_row[i] > 3 || pieces_in_col[i] > 3)
-        {
-            cout << result << endl;
-            return 0;
-        }
+
+    if (!is_continue()) {
+        cout << 0 << endl;
+        return;
     }
-    dfs(0, result);
-    cout << result << endl;
+
+    int ans = 0; dfs(0, ans);
+    cout << ans << endl;
+    return;
+}
+
+int main() {
+    solve();
     return 0;
 }

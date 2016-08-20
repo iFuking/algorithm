@@ -201,18 +201,30 @@ TreeNode* build_bst(vector<int> &v) {
     return root;
 }
 
+TreeNode *ll_rotate(TreeNode *root) {
+    TreeNode *p = root->left;
+    root->left = p->right;
+    p->right = root;
+    return p;
+}
+
+TreeNode *rr_rotate(TreeNode *root) {
+    TreeNode *p = root->right;
+    root->right = p->left;
+    p->left = root;
+    return p;
+}
+
 
 int main() {
     Codec sol;
-    string s = "17,12,19,10,15,-1,-1,-1,-1,13,-1";
+    string s = "18,14,20,12,16,-1,-1,-1,-1,15,-1";
     TreeNode *r = sol.deserialize(s);
-    pre_order(r); cout << endl;
-    insert_bst(r, 16);
-    pre_order(r); cout << endl;
+    pre_order(r);
+    cout << endl;
 
-    int a[] = {17, 12, 19, 10, 15, 13};
-    vector<int> v(a, a+sizeof(a)/sizeof(a[0]));
-    TreeNode *root = build_bst(v);
-    pre_order(root);
+    r->left = rr_rotate(r->left);
+    r = ll_rotate(r);
+    pre_order(r);
     return 0;
 }
